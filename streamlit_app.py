@@ -8,6 +8,19 @@ from datetime import datetime, timedelta
 import plotly.express as px
 import plotly.graph_objects as go
 
+from supabase import create_client
+import streamlit as st
+
+url = st.secrets["SUPABASE_URL"]
+key = st.secrets["SUPABASE_KEY"]
+
+supabase = create_client(url, key)
+
+test = supabase.table("karyawan").select("*").limit(1).execute()
+
+st.write("TEST DB:", test.data)
+
+
 # Load environment variables
 load_dotenv()
 
